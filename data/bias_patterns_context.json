@@ -1,0 +1,254 @@
+{
+  "bias_patterns": {
+    "confidence_valley": {
+      "description": "U-shaped fairness degradation pattern",
+      "characteristics": {
+        "shape": "High fairness → degradation → recovery → high fairness",
+        "duration": "Typically 3-6 months",
+        "depth": "20-40% fairness reduction at valley",
+        "frequency": "Found in 35% of temporal systems"
+      },
+      "detection": {
+        "algorithm": "Savitzky-Golay filtering with peak detection",
+        "parameters": {
+          "window_size": 7,
+          "polynomial_order": 3,
+          "min_valley_depth": 0.1
+        }
+      },
+      "real_world_examples": [
+        "Model retraining cycles",
+        "Seasonal hiring patterns",
+        "Budget cycle impacts"
+      ]
+    },
+    "sudden_shift": {
+      "description": "Step change in fairness metrics",
+      "characteristics": {
+        "onset": "Within 1-2 time periods",
+        "magnitude": "15-50% change typical",
+        "persistence": "Often permanent without intervention",
+        "triggers": ["Policy changes", "System updates", "External events"]
+      },
+      "detection": {
+        "algorithm": "CUSUM (Cumulative Sum)",
+        "parameters": {
+          "threshold": 3,
+          "drift": 0.5,
+          "minimum_shift": 0.1
+        }
+      }
+    },
+    "gradual_drift": {
+      "description": "Slow degradation over time",
+      "characteristics": {
+        "rate": "1-3% per month",
+        "detection_lag": "Often unnoticed for 3-6 months",
+        "causes": ["Data drift", "Concept drift", "Population changes"],
+        "reversibility": "Difficult without model retraining"
+      },
+      "detection": {
+        "algorithm": "Linear regression with R² validation",
+        "parameters": {
+          "min_r_squared": 0.7,
+          "min_slope": 0.01,
+          "window_size": 12
+        }
+      }
+    },
+    "periodic_oscillation": {
+      "description": "Cyclical fairness patterns",
+      "characteristics": {
+        "periods": ["Daily", "Weekly", "Monthly", "Quarterly"],
+        "amplitude": "10-30% variation",
+        "regularity": "Highly predictable",
+        "business_correlation": "Often tied to operational cycles"
+      },
+      "detection": {
+        "algorithm": "Autocorrelation analysis",
+        "parameters": {
+          "max_lag": 30,
+          "significance_threshold": 0.3,
+          "min_peaks": 2
+        }
+      }
+    },
+    "group_divergence": {
+      "description": "Increasing disparity between demographic groups",
+      "characteristics": {
+        "initial_gap": "5-10%",
+        "divergence_rate": "2-5% per month",
+        "acceleration": "Often exponential",
+        "intervention_point": "Before 20% gap"
+      },
+      "detection": {
+        "algorithm": "Trajectory analysis with divergence measurement",
+        "parameters": {
+          "min_divergence_rate": 0.02,
+          "trajectory_window": 6,
+          "significance_level": 0.05
+        }
+      }
+    },
+    "complex_patterns": {
+      "double_valley": {
+        "description": "W-shaped pattern with two degradation periods",
+        "frequency": "8% of systems",
+        "typical_cause": "Multiple retraining cycles"
+      },
+      "plateau": {
+        "description": "Extended period of stable but suboptimal fairness",
+        "duration": "6-12 months typical",
+        "resolution": "Requires active intervention"
+      },
+      "cascading_bias": {
+        "description": "Bias amplification through pipeline stages",
+        "amplification_factor": "2-3x per stage",
+        "example": "Hiring pipeline: screening → interview → offer"
+      }
+    }
+  },
+  "domain_specific_patterns": {
+    "healthcare": {
+      "triage_bias": {
+        "pattern": "Language and insurance correlated delays",
+        "magnitude": "43% longer wait for certain groups",
+        "peak_times": "Night shifts show 15-20% higher bias",
+        "mitigation": "Clinical indicator integration"
+      },
+      "severity_scoring": {
+        "pattern": "Cultural differences in symptom presentation",
+        "impact": "20-30% misclassification rate",
+        "validation": "Cross-cultural clinical validation required"
+      }
+    },
+    "finance": {
+      "loan_processing": {
+        "pattern": "Geographic and demographic delays",
+        "magnitude": "Rural areas 2x processing time",
+        "economic_sensitivity": "30% degradation during market shocks",
+        "early_warning": "PSI threshold 0.1-0.2"
+      },
+      "credit_cascades": {
+        "pattern": "Initial bias amplifies through credit score feedback",
+        "timeline": "6-12 month amplification cycle",
+        "intervention": "Feedback loop breaking required"
+      }
+    },
+    "employment": {
+      "resume_screening": {
+        "pattern": "15-20% initial disparity",
+        "amplification": "2-3x through pipeline",
+        "seasonal_effects": "Q4 freeze, Q1 surge affects groups unequally",
+        "mitigation": "Blind initial screening"
+      },
+      "decision_delays": {
+        "pattern": "Some groups wait 1.5x longer",
+        "correlation": "Strongly tied to seniority level",
+        "feedback": "Creates discouragementeffects"
+      }
+    },
+    "customer_service": {
+      "tier_discrimination": {
+        "pattern": "Bronze customers wait 3x longer than Platinum",
+        "within_tier": "20% bias even within same tier",
+        "channel_effects": "Phone 40% faster than chat/email",
+        "satisfaction_impact": "Queue position predicts satisfaction"
+      }
+    }
+  },
+  "synthetic_data_generation": {
+    "bias_injection_methods": {
+      "constant": {
+        "description": "Fixed bias level across all time periods",
+        "parameters": {"bias_strength": 0.3},
+        "use_case": "Baseline testing"
+      },
+      "increasing": {
+        "description": "Linear increase in bias over time",
+        "parameters": {"initial": 0.1, "rate": 0.02},
+        "use_case": "Drift detection testing"
+      },
+      "confidence_valley": {
+        "description": "U-shaped bias pattern",
+        "parameters": {"depth": 0.3, "valley_position": 0.5},
+        "use_case": "Valley detection validation"
+      },
+      "sudden_shift": {
+        "description": "Step change at specific point",
+        "parameters": {"shift_point": 0.4, "magnitude": 0.3},
+        "use_case": "Changepoint detection"
+      },
+      "oscillating": {
+        "description": "Sinusoidal bias pattern",
+        "parameters": {"amplitude": 0.2, "frequency": 4},
+        "use_case": "Periodic pattern detection"
+      }
+    },
+    "temporal_patterns": {
+      "rush_hour": {
+        "peaks": ["09:00", "12:00", "17:00"],
+        "multiplier": 2.5,
+        "duration": "1-2 hours"
+      },
+      "seasonal": {
+        "high_seasons": ["Q1", "Q4"],
+        "low_seasons": ["Q2", "Q3"],
+        "variation": "30-50%"
+      },
+      "weekly": {
+        "monday_surge": 1.5,
+        "friday_decline": 0.7,
+        "weekend_pattern": "Variable by domain"
+      }
+    },
+    "noise_characteristics": {
+      "measurement_noise": {
+        "distribution": "Gaussian",
+        "std_dev": 0.05,
+        "purpose": "Realistic sensor errors"
+      },
+      "sampling_noise": {
+        "distribution": "Poisson",
+        "purpose": "Variable sample sizes"
+      },
+      "labeling_noise": {
+        "error_rate": 0.02,
+        "purpose": "Human annotation errors"
+      }
+    }
+  },
+  "validation_patterns": {
+    "known_bias_scenarios": {
+      "healthcare_triage": {
+        "expected_tdp": 0.15,
+        "expected_qpf": 0.25,
+        "validation_tolerance": 0.05
+      },
+      "loan_processing": {
+        "expected_eoot": 0.12,
+        "expected_fdd_slope": -0.02,
+        "validation_window": 6
+      },
+      "hiring_pipeline": {
+        "stage_1_bias": 0.15,
+        "final_bias": 0.35,
+        "amplification_factor": 2.3
+      }
+    },
+    "edge_cases": {
+      "perfect_fairness": {
+        "all_metrics": 0,
+        "detection": "Should not trigger alerts"
+      },
+      "extreme_bias": {
+        "all_metrics": ">0.8",
+        "detection": "Immediate critical alert"
+      },
+      "insufficient_data": {
+        "sample_size": "<30 per group",
+        "behavior": "Graceful degradation with warnings"
+      }
+    }
+  }
+}

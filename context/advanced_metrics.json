@@ -1,0 +1,205 @@
+{
+  "temporal_methods": {
+    "STL_decomposition": {
+      "name": "Seasonal and Trend decomposition using Loess",
+      "purpose": "Separate trend, seasonal, and residual components",
+      "application": "Identify cyclical bias patterns",
+      "implementation": {
+        "window_sizes": {
+          "seasonal": 7,
+          "trend": 21,
+          "low_pass": 13
+        },
+        "robustness": "Use robust fitting for outliers",
+        "iterations": 2
+      },
+      "interpretation": {
+        "trend": "Long-term fairness evolution",
+        "seasonal": "Recurring patterns (daily/weekly/monthly)",
+        "residual": "Random variation and anomalies"
+      },
+      "validation": {
+        "residual_test": "Should be white noise",
+        "reconstruction": "Sum components = original",
+        "significance": "F-test for seasonal component"
+      }
+    },
+    
+    "VAR_models": {
+      "name": "Vector Autoregression",
+      "purpose": "Model cross-group temporal dependencies",
+      "application": "Predict how bias in one group affects others",
+      "implementation": {
+        "lag_selection": {
+          "criteria": ["AIC", "BIC", "HQ"],
+          "max_lags": 10,
+          "method": "Grid search"
+        },
+        "estimation": "OLS or maximum likelihood",
+        "diagnostics": {
+          "stability": "All eigenvalues < 1",
+          "residuals": "No autocorrelation",
+          "normality": "Jarque-Bera test"
+        }
+      },
+      "interpretation": {
+        "impulse_response": "How shocks propagate",
+        "variance_decomposition": "Contribution of each group",
+        "granger_causality": "Directional relationships"
+      },
+      "example_use": {
+        "groups": ["Group_A", "Group_B", "Group_C"],
+        "prediction": "If Group_A bias increases, predict Group_B response",
+        "lag_effect": "Typically 1-3 time periods"
+      }
+    },
+    
+    "CUSUM": {
+      "name": "Cumulative Sum Control Chart",
+      "purpose": "Detect sudden shifts in bias levels",
+      "application": "Real-time monitoring for changepoints",
+      "implementation": {
+        "target": "Expected fairness level",
+        "k": "Allowable slack (typically 0.5 * sigma)",
+        "h": "Decision threshold (typically 4-5 * sigma)",
+        "formulas": {
+          "positive": "C+ = max(0, x_i - (target + k) + C+_prev)",
+          "negative": "C- = max(0, (target - k) - x_i + C-_prev)"
+        }
+      },
+      "detection": {
+        "signal": "When C+ > h or C- > h",
+        "reset": "After detection, reset to 0",
+        "sensitivity": "Adjust k and h for response time"
+      },
+      "advantages": [
+        "Fast detection of small shifts",
+        "Memory of recent observations",
+        "Clear visual interpretation"
+      ]
+    },
+    
+    "fourier_analysis": {
+      "name": "Fourier Transform for Periodicity",
+      "purpose": "Identify cyclical fairness patterns",
+      "application": "Detect daily, weekly, monthly cycles",
+      "implementation": {
+        "method": "Fast Fourier Transform (FFT)",
+        "windowing": "Hamming or Hanning window",
+        "zero_padding": "For frequency resolution",
+        "normalization": "Power spectral density"
+      },
+      "periodogram": {
+        "lomb_scargle": "For irregular sampling",
+        "welch": "For noise reduction",
+        "significance": "Against red/white noise null"
+      },
+      "interpretation": {
+        "peaks": "Indicate periodic components",
+        "frequency": "Convert to time periods",
+        "amplitude": "Strength of periodicity"
+      }
+    },
+    
+    "causal_inference": {
+      "SEM": {
+        "name": "Structural Equation Modeling",
+        "purpose": "Model causal relationships",
+        "components": {
+          "measurement_model": "Latent variables from observables",
+          "structural_model": "Relationships between latents",
+          "error_terms": "Unexplained variance"
+        },
+        "identification": {
+          "rules": "3+ indicators per latent",
+          "df": "Positive degrees of freedom",
+          "constraints": "Fix loadings or variances"
+        }
+      },
+      "backdoor_paths": {
+        "purpose": "Identify confounding paths",
+        "method": "DAG analysis",
+        "adjustment": "Control for confounders",
+        "software": "dagitty, ggdag"
+      },
+      "instrumental_variables": {
+        "purpose": "Handle unmeasured confounding",
+        "requirements": {
+          "relevance": "Correlated with treatment",
+          "exclusion": "Affects outcome only through treatment",
+          "independence": "Uncorrelated with error"
+        },
+        "tests": {
+          "weak_instruments": "F > 10",
+          "overidentification": "Sargan test",
+          "endogeneity": "Hausman test"
+        }
+      }
+    },
+    
+    "anomaly_detection": {
+      "isolation_forest": {
+        "purpose": "Detect unusual bias patterns",
+        "mechanism": "Isolate anomalies with fewer splits",
+        "parameters": {
+          "n_estimators": 100,
+          "contamination": 0.1,
+          "max_samples": 256
+        }
+      },
+      "local_outlier_factor": {
+        "purpose": "Density-based anomaly detection",
+        "mechanism": "Compare local density to neighbors",
+        "parameters": {
+          "n_neighbors": 20,
+          "contamination": "auto"
+        }
+      },
+      "prophet": {
+        "purpose": "Time series anomaly detection",
+        "components": ["trend", "seasonality", "holidays"],
+        "uncertainty": "Bayesian inference",
+        "advantages": "Handles missing data, outliers"
+      }
+    }
+  },
+  
+  "implementation_priorities": {
+    "phase_1": [
+      "STL for basic decomposition",
+      "CUSUM for changepoint detection",
+      "Basic VAR for group dependencies"
+    ],
+    "phase_2": [
+      "Fourier for periodicity",
+      "SEM for causal analysis",
+      "Anomaly detection"
+    ],
+    "phase_3": [
+      "Advanced causal methods",
+      "Ensemble approaches",
+      "Real-time streaming versions"
+    ]
+  },
+  
+  "integration_guidance": {
+    "with_metrics": {
+      "TDP": "Apply STL to TDP time series",
+      "EOOT": "VAR model for TPR/FPR evolution",
+      "QPF": "CUSUM for queue bias shifts",
+      "FDD": "Built-in trend detection"
+    },
+    "pipeline_integration": {
+      "preprocessing": "STL decomposition first",
+      "monitoring": "CUSUM in real-time",
+      "analysis": "VAR for understanding",
+      "reporting": "Fourier for patterns"
+    },
+    "performance_requirements": {
+      "STL": "<100ms for 1000 points",
+      "VAR": "<500ms for estimation",
+      "CUSUM": "<1ms per observation",
+      "Fourier": "<50ms for FFT"
+    }
+  }
+}

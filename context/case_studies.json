@@ -1,0 +1,206 @@
+{
+  "case_studies": 8,
+  "domains": ["Healthcare", "Finance", "Employment", "Government Services"],
+  "total_affected": "200+ million people",
+  "economic_impact": "$500+ million in damages",
+  
+  "optum_healthcare": {
+    "name": "Optum Impact Pro Algorithm",
+    "year": "2019",
+    "scale": {
+      "affected": "200 million Americans",
+      "organizations": "Major health systems nationwide",
+      "decisions_per_year": "Millions"
+    },
+    "bias_mechanism": {
+      "proxy_used": "Healthcare expenditure as health need proxy",
+      "disparity": "$1,800 annual spending difference",
+      "result": "50% less care management for Black patients",
+      "despite": "Equal or greater clinical need"
+    },
+    "detection_approach": {
+      "metric": "TDP analysis would reveal disparity",
+      "pattern": "Historical bias in training data",
+      "signal": "Spending patterns reflect access barriers"
+    },
+    "mitigation": {
+      "solution": "Use clinical indicators instead of costs",
+      "effectiveness": "84% bias reduction achieved",
+      "accuracy": "Maintained predictive performance",
+      "implementation": "Reweighting + feature engineering"
+    },
+    "lessons_learned": [
+      "Healthcare costs are not race-neutral proxies",
+      "Historical inequities embed in seemingly objective data",
+      "Clinical outcomes better than financial proxies",
+      "Regular auditing essential for healthcare AI"
+    ],
+    "simulation_parameters": {
+      "population_size": 200000,
+      "severity_distribution": "Log-normal",
+      "spending_correlation": 0.6,
+      "bias_injection": "$1,800 systematic difference",
+      "care_threshold": "$50,000 annual"
+    }
+  },
+  
+  "michigan_midas": {
+    "name": "Michigan Integrated Data Automated System",
+    "years": "2013-2017",
+    "scale": {
+      "false_accusations": 40000,
+      "bankruptcies": 11000,
+      "total_penalties": "$500+ million",
+      "individual_fines": "$10,000-$50,000"
+    },
+    "bias_mechanism": {
+      "automation": "Fully automated fraud determination",
+      "error_rate": "93% false positive rate initially",
+      "burden": "Citizens must disprove accusations",
+      "incentive": "Revenue generation from penalties"
+    },
+    "systemic_failures": [
+      "No human oversight for high-stakes decisions",
+      "Reverse burden of proof",
+      "Disproportionate impact on vulnerable populations",
+      "Revenue incentives override accuracy"
+    ],
+    "detection_approach": {
+      "metric": "QPF would show systematic targeting",
+      "pattern": "Aggregation bias in batch processing",
+      "signal": "Certain demographics flagged more often"
+    },
+    "consequences": {
+      "financial": "Families lost homes, savings",
+      "legal": "Class action lawsuit settled",
+      "social": "Destroyed credit, relationships",
+      "systemic": "Erosion of public trust"
+    },
+    "simulation_parameters": {
+      "population": 40000,
+      "false_positive_rate": 0.93,
+      "penalty_range": [10000, 50000],
+      "appeal_success_rate": 0.77,
+      "demographic_skew": 2.5
+    }
+  },
+  
+  "amazon_hiring": {
+    "name": "Amazon Recruiting Algorithm",
+    "year": "2014-2018",
+    "issue": "Systematic gender discrimination",
+    "mechanism": {
+      "training_data": "10 years of male-dominated hiring",
+      "penalized_terms": ["women's", "female"],
+      "college_bias": "Women's colleges downranked",
+      "pattern": "Historical bias amplification"
+    },
+    "detection": {
+      "metric": "EOOT would show disparate accuracy",
+      "category": "Historical and representation bias",
+      "timeline": "Bias increased over time"
+    },
+    "outcome": "System scrapped after failed debiasing attempts"
+  },
+  
+  "compass_criminal_justice": {
+    "name": "COMPAS Recidivism Prediction",
+    "ongoing": true,
+    "bias_type": "Racial disparities in risk scores",
+    "false_positive_ratio": "Black defendants 2x false positive rate",
+    "mechanism": "Proxy variables correlate with race",
+    "impact": "Harsher sentences, denied parole",
+    "detection": "FDD shows increasing disparity over time"
+  },
+  
+  "apple_card": {
+    "name": "Apple Card Credit Limits",
+    "year": "2019",
+    "issue": "Gender discrimination in credit limits",
+    "magnitude": "Women received 10-20x lower limits",
+    "despite": "Same income, credit scores",
+    "mechanism": "Black-box algorithm decisions",
+    "regulatory": "NY DFS investigation launched"
+  },
+  
+  "netherlands_childcare": {
+    "name": "Dutch Childcare Benefits Scandal",
+    "years": "2013-2019",
+    "affected": 26000,
+    "mechanism": "Algorithmic fraud detection",
+    "bias": "Dual nationality flagged as risk",
+    "consequences": "Families destroyed, children removed",
+    "government_response": "Cabinet resignation"
+  },
+  
+  "uk_exam_grades": {
+    "name": "UK A-Level Algorithm",
+    "year": "2020",
+    "affected": "40% of students downgraded",
+    "bias": "School history penalized disadvantaged areas",
+    "pattern": "Historical bias perpetuation",
+    "outcome": "Algorithm abandoned after protests"
+  },
+  
+  "facebook_housing": {
+    "name": "Facebook Housing Ads",
+    "years": "2016-2019",
+    "violation": "Fair Housing Act",
+    "mechanism": "Ad targeting by demographics",
+    "settlement": "$5 million",
+    "change": "Removed targeting options for protected classes"
+  },
+  
+  "cross_domain_patterns": {
+    "automation_without_oversight": {
+      "examples": ["Michigan MiDAS", "Netherlands childcare"],
+      "consequence": "Catastrophic false positive rates",
+      "mitigation": "Mandatory human review"
+    },
+    "revenue_incentives": {
+      "examples": ["Michigan MiDAS", "Private prisons"],
+      "pattern": "Accuracy sacrificed for revenue",
+      "solution": "Align incentives with fairness"
+    },
+    "burden_reversal": {
+      "examples": ["MiDAS", "Netherlands"],
+      "impact": "Citizens must prove innocence",
+      "fix": "Maintain presumption of innocence"
+    },
+    "historical_perpetuation": {
+      "examples": ["Amazon", "UK exams", "Optum"],
+      "mechanism": "Past discrimination encoded",
+      "approach": "Temporal decay, reweighting"
+    },
+    "proxy_discrimination": {
+      "examples": ["COMPAS", "Optum", "Apple Card"],
+      "pattern": "Neutral variables correlate with protected",
+      "detection": "Correlation analysis, ablation studies"
+    }
+  },
+  
+  "implementation_guidance": {
+    "simulation_requirements": {
+      "scale": "Match real-world population sizes",
+      "bias_injection": "Use documented disparity levels",
+      "temporal_patterns": "Include time-based effects",
+      "validation": "Compare with published statistics"
+    },
+    "pattern_detection": {
+      "metrics_to_use": {
+        "Optum": "TDP for spending disparity",
+        "MiDAS": "QPF for systematic targeting",
+        "Amazon": "EOOT for accuracy disparity",
+        "COMPAS": "FDD for increasing bias"
+      }
+    },
+    "mitigation_validation": {
+      "target_reduction": {
+        "Healthcare": "80%+ bias reduction",
+        "Government": "<5% false positive rate",
+        "Employment": "Statistical parity",
+        "Finance": "Equal opportunity"
+      }
+    }
+  }
+}

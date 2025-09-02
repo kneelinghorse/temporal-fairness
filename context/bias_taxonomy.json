@@ -1,0 +1,189 @@
+{
+  "taxonomy": {
+    "categories": 4,
+    "validated_across": ["Healthcare", "Finance", "Employment", "Government Services"],
+    "detection_priority": "Implement in order of prevalence and impact"
+  },
+  
+  "historical_bias": {
+    "definition": "Past discrimination embedded in training data that perpetuates through time",
+    "characteristics": {
+      "persistence": "Remains in data for decades",
+      "compounding": "Effects amplify over time",
+      "hidden": "Often appears as legitimate patterns"
+    },
+    "examples": {
+      "healthcare": {
+        "pattern": "Spending patterns reflect systematic access barriers",
+        "magnitude": "$1,800 annual difference between equally-sick patients",
+        "mechanism": "Historical underutilization coded as lower need"
+      },
+      "finance": {
+        "pattern": "Credit history embedded with redlining effects",
+        "timeframe": "1960s-1990s discrimination still present",
+        "impact": "Zip codes as proxies for race"
+      },
+      "employment": {
+        "pattern": "Past hiring discrimination reflected in 'culture fit'",
+        "persistence": "Decades of homogeneous hiring",
+        "perpetuation": "AI learns discriminatory patterns"
+      }
+    },
+    "detection_methods": [
+      "Temporal correlation analysis",
+      "Historical baseline comparison",
+      "Proxy variable identification"
+    ],
+    "mitigation_approaches": {
+      "reweighting": "Adjust historical samples to current demographics",
+      "temporal_decay": "Reduce weight of older discriminatory data",
+      "synthetic_augmentation": "Generate fair historical counterfactuals"
+    }
+  },
+  
+  "representation_bias": {
+    "definition": "Features that systematically correlate with protected attributes",
+    "characteristics": {
+      "indirect": "Appears neutral but discriminates",
+      "systematic": "Consistent patterns across domains",
+      "multivariate": "Complex feature interactions"
+    },
+    "examples": {
+      "urgency_scoring": {
+        "pattern": "Algorithms systematically underweight certain demographic factors",
+        "mechanism": "Response speed correlates with socioeconomic status",
+        "impact": "Lower priority assignment for vulnerable groups"
+      },
+      "communication_patterns": {
+        "pattern": "Linguistic variations treated as lower priority",
+        "features": ["Email response time", "Grammar patterns", "Vocabulary choice"],
+        "bias": "Favors certain communication styles"
+      },
+      "availability_features": {
+        "pattern": "Scheduling flexibility as merit proxy",
+        "correlation": "Flexibility correlates with privilege",
+        "discrimination": "Penalizes those with constraints"
+      }
+    },
+    "detection_methods": [
+      "Feature importance analysis",
+      "Correlation matrices with protected attributes",
+      "Ablation studies removing suspect features"
+    ],
+    "mitigation_approaches": {
+      "feature_selection": "Remove high-correlation features",
+      "adversarial_debiasing": "Learn representations independent of protected attributes",
+      "fairness_constraints": "Add constraints during optimization"
+    }
+  },
+  
+  "measurement_bias": {
+    "definition": "Systematic differences in how metrics are measured across groups",
+    "characteristics": {
+      "cultural": "Varies by cultural context",
+      "subjective": "Involves human interpretation",
+      "calibration": "Same underlying value measured differently"
+    },
+    "examples": {
+      "healthcare_triage": {
+        "pattern": "Pain descriptions vary culturally",
+        "undervaluation": "Certain presentations systematically scored lower",
+        "consequence": "Delayed or denied treatment"
+      },
+      "risk_assessment": {
+        "pattern": "Lack of traditional markers penalized",
+        "missing_data": "Treated as high risk rather than unknown",
+        "impact": "Higher rates, denied services"
+      },
+      "customer_priority": {
+        "pattern": "Complaint severity interpretation varies",
+        "linguistic_bias": "Certain phrases trigger different responses",
+        "result": "Systematically lower priority assignment"
+      }
+    },
+    "detection_methods": [
+      "Calibration analysis across groups",
+      "Distribution comparison of scores",
+      "Ground truth validation studies"
+    ],
+    "mitigation_approaches": {
+      "recalibration": "Adjust scores to achieve parity",
+      "multi_rater": "Average across diverse evaluators",
+      "objective_metrics": "Replace subjective with objective measures"
+    }
+  },
+  
+  "aggregation_bias": {
+    "definition": "Bias introduced through batch processing and temporal aggregation",
+    "characteristics": {
+      "systemic": "Affects entire groups simultaneously",
+      "compound": "Individual biases amplify when aggregated",
+      "feedback": "Creates self-reinforcing cycles"
+    },
+    "examples": {
+      "batch_processing": {
+        "pattern": "Certain populations processed in unfavorable batches",
+        "timing": "End-of-day, end-of-quarter disadvantages",
+        "delay": "Systematic delays for specific groups"
+      },
+      "priority_algorithms": {
+        "pattern": "Queue position calculations compound individual biases",
+        "amplification": "Small biases become large disparities",
+        "persistence": "Difficult to escape low priority"
+      },
+      "resource_allocation": {
+        "pattern": "Feedback loops amplify initial disparities",
+        "mechanism": "Success breeds success, failure breeds failure",
+        "inequality": "Resources concentrate away from needy groups"
+      }
+    },
+    "detection_methods": [
+      "Batch composition analysis",
+      "Temporal clustering detection",
+      "Feedback loop identification"
+    ],
+    "mitigation_approaches": {
+      "randomization": "Randomize batch composition",
+      "fair_scheduling": "Ensure proportional representation",
+      "feedback_interruption": "Break reinforcement cycles"
+    }
+  },
+  
+  "cross_category_patterns": {
+    "interactions": [
+      "Historical bias feeds representation bias",
+      "Measurement bias amplifies through aggregation",
+      "All categories compound in temporal systems"
+    ],
+    "detection_priority": [
+      "Start with aggregation (most visible)",
+      "Then measurement (most correctable)",
+      "Then representation (most complex)",
+      "Finally historical (most persistent)"
+    ],
+    "combined_impact": {
+      "multiplicative": "Effects multiply rather than add",
+      "threshold_effects": "Sudden degradation at tipping points",
+      "cascade_failures": "One category triggers others"
+    }
+  },
+  
+  "implementation_guidance": {
+    "classifier_requirements": {
+      "multi_label": "Biases often belong to multiple categories",
+      "confidence_scores": "Indicate detection certainty",
+      "explainability": "Show why classification was made"
+    },
+    "integration_points": {
+      "data_ingestion": "Classify at data entry",
+      "monitoring": "Continuous classification during operation",
+      "alerting": "Trigger specific alerts per category"
+    },
+    "success_metrics": {
+      "accuracy": "90%+ correct classification on known patterns",
+      "coverage": "Detect all 4 categories reliably",
+      "speed": "<10ms per classification",
+      "actionability": "Clear mitigation path from classification"
+    }
+  }
+}
