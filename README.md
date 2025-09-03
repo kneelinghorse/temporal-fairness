@@ -165,10 +165,7 @@ If you use this framework in your research, please cite:
 
 ## 🔗 Related Resources
 
-- [Research Blog Post](https://link-to-blog)
-- [Demo Video](https://link-to-video)
-- [Slides](research/presentation_slides.pdf)
-- [Poster](research/conference_poster.pdf)
+- 
 
 ## 📜 License
 
