@@ -5,7 +5,7 @@
 [![Latency](https://img.shields.io/badge/Overhead-<85ms-green)](benchmarks/)
 [![Papers Reviewed](https://img.shields.io/badge/Papers%20Analyzed-52-orange)](research/)
 
-## 🎯 Groundbreaking Discovery
+## 🎯 New Discovery
 
 **Our research reveals that 53% of fairness violations occur in temporal ordering systems** where urgency calculations inadvertently discriminate against protected groups. This repository contains the complete implementation of our temporal fairness framework, including novel metrics, detection algorithms, and mitigation strategies.
 
